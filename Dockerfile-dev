@@ -1,0 +1,12 @@
+FROM docker.io/library/python:3.8.12-slim-buster@sha256:ebfc7ab9e8a4196a66d7a893a33ebe693f135990128d08b2f35d61d0a010ee40
+RUN python3 -m pip install --upgrade pip setuptools wheel
+
+# Production
+COPY requirements.txt /tmp/requirements.txt
+RUN python3 -m pip install --no-cache-dir -r /tmp/requirements.txt
+
+# Dev
+COPY requirements-dev.txt /tmp/requirements-dev.txt
+RUN apt-get update && apt-get install -y git ruby && gem install chef-utils -v 16.6.14 && python3 -m pip install -r requirements-dev.txt
+COPY .pre-commit-config.yaml /tmp/.pre-commit-config.yaml
+RUN git init && pre-commit install --install-hooks

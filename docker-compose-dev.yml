@@ -1,0 +1,16 @@
+---
+services:
+  python:
+    build:
+      context: .
+      dockerfile: Dockerfile-dev
+    command: bash
+    container_name: python_container
+    environment:
+      PYTHONDONTWRITEBYTECODE: 1
+    image: nextdrive.io/datascience/python-template:dev
+    tty: true
+    volumes:
+      - .:/workspace/repo:rw
+    working_dir: /workspace/repo
+version: '3'

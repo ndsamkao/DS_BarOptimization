@@ -1,0 +1,29 @@
+[tool.black]
+line-length = 110
+target-version = ["py38"]
+skip-string-normalization = true
+
+[tool.mypy]
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+ignore_missing_imports = true
+exclude = '^tests\/.*$|^\..*$'
+
+[tool.isort]
+profile = "black"
+
+[tool.pytest.ini_options]
+addopts = "--cov myproj --cov-report term-missing --cov-fail-under 80"
+# filterwarnings = [
+#     "ignore::DeprecationWarning",
+# ]
+
+# [tool.coverage.run]
+# omit = [
+#     "myproj/mysubmodule/*"
+# ]
