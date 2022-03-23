@@ -1,6 +1,6 @@
 import logging
 from itertools import combinations
-from typing import Any, Tuple
+from typing import Any, List, Tuple
 
 import numpy as np
 import pandas as pd
@@ -15,10 +15,10 @@ class OptimizeWarningBar:
         battery_capacity: float,
         battery_initial: float,
         contract_capacity: float,
-        threshold: np.array = [0.9, 0.85, 0.8, 0.3],
-        discharging_range: np.array = [7, 5, 3],
-        charging_range: np.array = [5],
-        charging_period: np.array = [0, 5],
+        threshold: List[float] = [0.9, 0.85, 0.8, 0.3],
+        discharging_range: List[int] = [7, 5, 3],
+        charging_range: List[int] = [5],
+        charging_period: List[int] = [0, 5],
         **kwargs: Any,
     ) -> None:
 
@@ -128,7 +128,7 @@ class OptimizeWarningBar:
         else:
             return 0.0
 
-    def obj_fn(self, bar: np.array) -> float:
+    def obj_fn(self, bar: List[float]) -> float:
         comb = pd.Series(bar)
         logging.info('combination:', np.array(comb))
         bar_model = OptimizeWarningBar(
@@ -151,7 +151,7 @@ class OptimizeWarningBar:
         threshold_all = pd.Series(list(combinations(np.arange(0.81, 0.99, 0.01).round(2), 3)))
         rnd_idx = np.random.choice(np.arange(len(threshold_all)), epoch)
         threshold_tmp = pd.Series(
-            [(list(i) + [self.safty_point]) for i in threshold_all[rnd_idx]], dtype=np.float
+            [(list(i) + [self.safty_point]) for i in threshold_all[rnd_idx]], dtype=float
         )
         old_result = self.obj_fn(self.threshold)
         result = threshold_tmp.map(self.obj_fn)
