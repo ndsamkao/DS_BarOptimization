@@ -18,7 +18,7 @@ exclude = '^tests\/.*$|^\..*$'
 profile = "black"
 
 [tool.pytest.ini_options]
-addopts = "--cov myproj --cov-report term-missing --cov-fail-under 80"
+addopts = "--cov bar_optimization --cov-report term-missing --cov-fail-under 80"
 # filterwarnings = [
 #     "ignore::DeprecationWarning",
 # ]

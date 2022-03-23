@@ -1,0 +1,6 @@
+[submodule "DS_Warning"]
+	path = DS_Warning
+	url = git@github.com:nextDriveIoE/DS_Warning.git
+[submodule "DS_Utility"]
+	path = DS_Utility
+	url = git@github.com:nextDriveIoE/DS_Utility.git
