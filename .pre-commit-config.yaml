@@ -7,15 +7,11 @@ repos:
       - id: identity
       - id: check-hooks-apply
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.0.1
+    rev: v4.1.0
     hooks:
       - id: check-added-large-files
-      - id: check-executables-have-shebangs
       - id: check-shebang-scripts-are-executable
-      - id: check-json
       - id: check-toml
-      - id: check-yaml
-        args: [--allow-multiple-documents]
       - id: detect-private-key
       - id: end-of-file-fixer
       - id: trailing-whitespace
@@ -25,15 +21,14 @@ repos:
     rev: v1.9.0
     hooks:
       - id: python-use-type-annotations
-        exclude: ^tests/.*$
       - id: python-no-log-warn
   - repo: https://github.com/asottile/pyupgrade
-    rev: v2.29.1
+    rev: v2.31.1
     hooks:
       - id: pyupgrade
         args: ["--py38-plus"]
   - repo: https://github.com/psf/black
-    rev: 21.11b1
+    rev: 22.1.0
     hooks:
       - id: black
   - repo: https://github.com/markdownlint/markdownlint
@@ -55,24 +50,11 @@ repos:
       - id: isort
         name: Sort imports in Python files
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v0.910-1
+    rev: v0.941
     hooks:
       - id: mypy
-        exclude: '^tests\/.*$|^\..*$'
-        additional_dependencies:
-          - types-PyYAML
-          - types-requests
   - repo: https://github.com/compilerla/conventional-pre-commit
     rev: v1.2.0
     hooks:
       - id: conventional-pre-commit
         stages: [commit-msg]
-# - repo: local
-#   hooks:
-#     # pytest-dev/pytest-cov does not provide .pre-commit-hook.yaml
-#     # https://github.com/pre-commit/pre-commit-hooks/issues/291
-#     - id: pytest-cov
-#       name: pytest-cov
-#       entry: "python3 -m pytest tests"
-#       language: system
-#       pass_filenames: false
