@@ -45,8 +45,8 @@ class OptimizeWarningBar:
             return 'discharging', -discharging_list[2]
         elif level == 'white':
             return 'charging', charging_list[0]
-        elif level == 'none':
-            return 'standby', 0
+
+        return 'standby', 0
 
     def simulate_data(self) -> pd.DataFrame:
 
@@ -125,8 +125,7 @@ class OptimizeWarningBar:
                 month=month,
             )
             return np.round(before_result['original_fee'][0], 3)
-        else:
-            return 0.0
+        return 0.0
 
     def obj_fn(self, bar: List[float]) -> float:
         comb = pd.Series(bar)

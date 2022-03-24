@@ -11,12 +11,12 @@ def test_optimize_bar(optimize_warning_bar_data):
         battery_initial=0,
         contract_capacity=120,
         threshold=[0.9, 0.8, 0.7, 0.3],
-        discharging_range=[7, 5, 3],
-        charging_range=[5],
-        charging_period=[0, 5],
+        discharging_range=[7, 5, 3],  # kw
+        charging_range=[5],  # kw
+        charging_period=[0, 5],  # hour
     )
 
-    result_df = bar_model.get_optimal_result(epoch=3)
+    result_df = bar_model.get_optimal_result(epoch=3).reset_index(drop=True)
 
     expected_df = pd.DataFrame(
         {
@@ -28,6 +28,6 @@ def test_optimize_bar(optimize_warning_bar_data):
         }
     )
 
-    print(result_df)
-    print(expected_df)
-    assert result_df.equals(expected_df)
+    print(result_df[['save', 'judge']])
+    print(expected_df[['save', 'judge']])
+    assert result_df[['save', 'judge']].equals(expected_df[['save', 'judge']])
